@@ -16,31 +16,55 @@ defmodule Server.Database do
 
   @impl true
   def handle_call({:create, table_name}, _from, intern_state) do
-    :ets.new(table_name, [:named_table])
-    {:reply, :ok, intern_state}
+    case :ets.whereis(table_name) do
+      :undefined ->
+        :ets.new(table_name, [:named_table])
+        {:reply, :ok, intern_state}
+      _ -> {:reply, :error, intern_state}
+      end
   end
 
   @impl true
   def handle_call({:read, table, key}, _from, intern_state) do
-    {:reply, :ets.lookup(table, key), intern_state}
+    case :ets.whereis(table) do
+      :undefined -> {:reply, :error, intern_state}
+      _ -> {:reply, :ets.lookup(table, key), intern_state}
+    end
   end
 
   @impl true
   def handle_call({:write, table, {key, value}}, _from, intern_state) do
-    :ets.insert(table, {key, value})
-    {:reply, :ok, intern_state}
+    case :ets.whereis(table) do
+      :undefined -> {:reply, :error, intern_state}
+      _ ->
+        :ets.insert(table, {key, value})
+        {:reply, :ok, intern_state}
+    end
   end
 
   @impl true
   def handle_call({:delete, table, key}, _from, intern_state) do
-    :ets.delete(table, key)
-    {:reply, :ok, intern_state}
+    case :ets.whereis(table) do
+      :undefined -> {:reply, :error, intern_state}
+      _ ->
+        :ets.delete(table, key)
+        {:reply, :ok, intern_state}
+    end
   end
 
   @impl true
   def handle_call({:delete, table}, _from, intern_state) do
-    :ets.delete(table)
-    {:reply, :ok, intern_state}
+    case :ets.whereis(table) do
+      :undefined -> {:reply, :error, intern_state}
+      _ ->
+        :ets.delete(table)
+        {:reply, :ok, intern_state}
+    end
+  end
+
+  @impl true
+  def handle_call(_, _from, intern_state) do
+    {:reply, :error, intern_state}
   end
 
 end
