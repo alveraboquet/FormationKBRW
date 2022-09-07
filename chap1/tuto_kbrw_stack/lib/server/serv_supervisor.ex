@@ -7,7 +7,8 @@ defmodule Server.ServSupervisor do
 
   def init(_) do
     children = [
-      {Server.Database, name: Database}
+      {Server.Database, name: Database},
+      {Server.JsonLoader, name: JsonLoader}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

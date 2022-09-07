@@ -2,7 +2,7 @@ defmodule Server.DatabaseTest do
   use ExUnit.Case
 
   setup do
-    {:ok, database} = Server.Database.start_link(:ok)
+    {_, database} = Server.Database.start_link(:ok)
     %{pid: database}
   end
 
