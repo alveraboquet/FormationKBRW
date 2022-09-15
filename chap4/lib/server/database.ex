@@ -93,8 +93,8 @@ defmodule Server.Database do
       _ ->
         {:reply, {:ok, Enum.filter(
           Enum.map(criteria, fn {key, value} ->
-#            search_criteria(table, :ets.first(table), {key, value}, [])
-            search_criteria({key, value}, :ets.tab2list(table))
+            search_criteria(table, :ets.first(table), {key, value}, [])
+#            search_criteria({key, value}, :ets.tab2list(table))
           end), fn obj -> obj != [] end
         )}, intern_state}
     end

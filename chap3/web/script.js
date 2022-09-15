@@ -1,4 +1,4 @@
-var createReactClass = require('create-react-class')
+/*var createReactClass = require('create-react-class')
 
 var Page = createReactClass({
   render(){
@@ -12,4 +12,13 @@ var Page = createReactClass({
 ReactDOM.render(
   <Page/>,
   document.getElementById('root')
-)
+)*/
+
+function test() {
+  var test = React.createElement('p', {}, 'Hey I was created from React!')
+  ReactDOM.render(
+    test,
+    document.getElementById('root')
+  )
+//  alert("Hello world")
+}

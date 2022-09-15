@@ -1,0 +1,12 @@
+{application,tuto_kbrw_stack,
+             [{applications,[kernel,stdlib,elixir,logger,poison,plug_cowboy]},
+              {description,"tuto_kbrw_stack"},
+              {modules,['Elixir.Server.Database','Elixir.Server.JsonLoader',
+                        'Elixir.Server.PlugSupervisor','Elixir.Server.Router',
+                        'Elixir.Server.ServSupervisor',
+                        'Elixir.Server.TheCreator',
+                        'Elixir.Server.TheFirstPlug','Elixir.TutoKbrwStack',
+                        'Elixir.TutoKbrwStack.Application']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.TutoKbrwStack',[]}}]}.
